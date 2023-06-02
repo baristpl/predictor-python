@@ -7,16 +7,16 @@ min = 60000
 def predicate(price, seri, model, araba_yasi, kilometre, yillik_mtv, motor_gucu, vites_tipi_Düz, vites_tipi_Otomatik,
             garanti_durumu) -> int:
     data = {
-        'price': price,
-        'seri': seri,
-        'model': model,
-        'araba_yasi': araba_yasi,
-        'kilometre': kilometre,
-        'yillik_mtv': yillik_mtv,
-        'motor_gucu': motor_gucu,
-        'vites_tipi_Düz': vites_tipi_Düz,
-        'vites_tipi_Otomatik': vites_tipi_Otomatik,
-        'garanti_durumu': garanti_durumu
+        'price': [price],
+        'seri': [seri],
+        'model': [model],
+        'araba_yasi': [araba_yasi],
+        'kilometre': [kilometre],
+        'yillik_mtv': [yillik_mtv],
+        'motor_gucu': [motor_gucu],
+        'vites_tipi_Düz': [vites_tipi_Düz],
+        'vites_tipi_Otomatik': [vites_tipi_Otomatik],
+        'garanti_durumu': [garanti_durumu]
     }
 
     rf = load('random_forest_regressor.joblib')
