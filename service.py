@@ -6,7 +6,6 @@ from predictor import predicate
 app = FastAPI()
 
 
-
 class PredictionParameters(BaseModel):
     series: str = None
     model: str = None
@@ -18,15 +17,18 @@ class PredictionParameters(BaseModel):
     guarantee: str = None
 
 
-@app.post("/predicate")
-def create_item(item: PredictionParameters) -> int:
+class PredictionResponse(BaseModel):
+    price: int
+
+
+@app.post("/predicate", response_model=PredictionResponse)
+def create_item(item: PredictionParameters) -> PredictionResponse:
     isAutomaticTransmission = "1" if item.transmission == "automatic" else "0"
     isManuelTransmission = "1" if isAutomaticTransmission == "0" else "0"
 
     print(item)
-    return predicate("0", item.series, item.model, item.year, item.kilometer, item.mtv, item.power,
-                     isManuelTransmission,
-                     isAutomaticTransmission, item.guarantee)
+    price = predicate("0", item.series, item.model, item.year, item.kilometer, item.mtv, item.power,
+                      isManuelTransmission,
+                      isAutomaticTransmission, item.guarantee)
 
-
-
+    return PredictionResponse(price=price)
