@@ -6,7 +6,6 @@ from predictor import predicate
 app = FastAPI()
 
 
-
 class PredictionParameters(BaseModel):
     series: str = None
     model: str = None
@@ -27,6 +26,3 @@ def create_item(item: PredictionParameters) -> int:
     return predicate("0", item.series, item.model, item.year, item.kilometer, item.mtv, item.power,
                      isManuelTransmission,
                      isAutomaticTransmission, item.guarantee)
-
-
-
